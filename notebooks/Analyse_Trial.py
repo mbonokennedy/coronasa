@@ -4,16 +4,19 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 def distribution():
-    testing_results = pd.read_csv('https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_timeline_testing.csv')
+    ##testing_results = pd.read_csv('https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_timeline_testing.csv')
     confirmed_results = pd.read_csv('https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_timeline_confirmed.csv')
     
     trial = pd.notnull(confirmed_results["age"])
 
-    attempt = pd.isnull(confirmed_results["age"])
+    ##attempt = pd.isnull(confirmed_results["age"])
     
     return(confirmed_results[trial].drop(columns=['case_id', 'YYYYMMDD','geo_subdivision']))
 
 def  distribution_plot():
+    confirmed_results = pd.read_csv('https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_timeline_confirmed.csv')
+    trial = pd.notnull(confirmed_results["age"])
+    ##attempt = pd.isnull(confirmed_results["age"])
     print('Enter the number of bins between 0 and 100')
     n_of_bins = input(str())
     print('Enter the number of xticks between 0 and 4')
@@ -31,6 +34,9 @@ def  distribution_plot():
     return(plots)
     
 def other_distributions():
+    confirmed_results = pd.read_csv('https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_timeline_confirmed.csv')
+    trial = pd.notnull(confirmed_results["age"])
+    ##attempt = pd.isnull(confirmed_results["age"])
     plt.figure(figsize=(15,8)) #Set figure size
     plt.title('Countplot of the COVID-19 Positive Cases in each South African Province')
 
@@ -61,6 +67,9 @@ def other_distributions():
     return(plt.show())
 
 def overall_data():
+    confirmed_results = pd.read_csv('https://raw.githubusercontent.com/dsfsi/covid19za/master/data/covid19za_timeline_confirmed.csv')
+    trial = pd.notnull(confirmed_results["age"])
+    attempt = pd.isnull(confirmed_results["age"])
     cumulative_cases = confirmed_results[trial][['date', 'country']].groupby('date').count().cumsum().reset_index().rename(columns={'country':'cumulative sum'}) #create cumulative dataframe
     fig, ax = plt.subplots(ncols=2, nrows=2, figsize=(35,10))
 
